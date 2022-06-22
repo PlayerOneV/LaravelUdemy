@@ -17,10 +17,11 @@ class User extends Authenticatable
      *
      * @var array<int, string>
      */
-    protected $fillable = [
+    protected $fillable = [ //Indicamos que campos de la tabla users van a poder modificarse
         'name',
         'email',
         'password',
+        'username'
     ];
 
     /**
