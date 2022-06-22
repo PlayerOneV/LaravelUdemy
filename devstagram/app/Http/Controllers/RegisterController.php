@@ -21,7 +21,7 @@ class RegisterController extends Controller
 
         //Modificar el request
         $request->request->add(['username' => Str::slug($request->username)]); //Tenemos que transformalo antes de verificar si ya existe
-        
+
         //Validación de valores recibidos del formulario
         $this->validate($request, [
             'name' => 'required|max:30',
@@ -37,6 +37,13 @@ class RegisterController extends Controller
             'email' => $request->email,
             'password' => Hash::make($request->password)
         ]);
+
+        //Autenticar un usuario
+        /* auth()->attempt([
+            'email' => $request->email,
+            'password' => $request->password
+        ]); */
+        auth()->attempt($request->only('email', 'password'));
 
         //Redireccionamiento
         return redirect()->route('posts.index');
