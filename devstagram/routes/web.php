@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ImagenController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\LogoutController;
 use App\Http\Controllers\PostController;
@@ -16,16 +17,23 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+//Ruta main
 Route::get('/', function () {
     return view('main');
 });
 
+//Rutas para registrar un nuevo usuario
 Route::get('/register', [RegisterController::class, 'index'])->name('register');
 Route::post('/register', [RegisterController::class, 'store']);
 
+//Rutas para iniciar y cerrar sesión
 Route::get('/login', ([LoginController::class, 'index']))->name('login');
 Route::post('/login', ([LoginController::class, 'store']))->name('login');
 Route::post('/logout', [LogoutController::class, 'store'])->name('logout');
 
+//Rutas para mostrar perfiles de los usuarios y crear posts
 Route::get('/{user:username}', [PostController::class, 'index'])->name('posts.index');
+Route::get('/posts/create', [PostController::class, 'create'])->name('posts.create');
+
+//Ruta para resivir imagen al crear un post
+Route::post('/imagenes', [ImagenController::class, 'store'])->name('imagenes.store');
