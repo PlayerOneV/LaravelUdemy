@@ -6,8 +6,8 @@ use Illuminate\Http\Request;
 
 class ImagenController extends Controller
 {
-    public function store()
+    public function store(Request $request)
     {
-        return 'from image controller';
+        
     }
 }
